@@ -1,0 +1,191 @@
+/* Import font */
+
+* {
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+body {
+    background: #282a36;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    padding: 100px;
+
+}
+
+#action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+}
+
+#open {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    padding: 10px;
+    background-color: #b22e5b;
+    border-radius: 5px;
+}
+
+.open-buttons {
+    background-color: #b22e5b;
+    padding: 12px 20px; /* Padding for top/bottom and left/right */
+    font-size: 14px; /* Font size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    color: white;    
+}
+
+.open-buttons:hover {
+    filter: brightness(1.4); /* Slightly dim on hover */
+}
+
+#open-frequency {
+    background-color: #a71045;
+    width: 60px;
+    height: 30px;
+    border: none;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    margin: 5px;
+
+}
+
+#fold-frequency {
+    background-color: #232530;
+    width: 60px;
+    height: 30px;
+    border: none;
+    text-align: center;
+    color: white;
+    font-weight: bold;    
+    margin: 5px;
+}
+
+#fold {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    padding: 10px;
+    background-color: #414558;
+    border-radius: 5px;
+}
+
+.fold-buttons {
+    background-color: #414558;
+    padding: 12px 20px; /* Padding for top/bottom and left/right */
+    font-size: 14px; /* Font size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    color: white;
+}
+
+.fold-buttons:hover {
+    filter: brightness(1.4); /* Slightly dim on hover */
+}
+
+
+.position-button {
+    background-color: #1f202a;
+    padding: 12px 20px; /* Padding for top/bottom and left/right */
+    font-size: 16px; /* Font size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    color: white;
+}
+
+
+.position-button:hover {
+    opacity: 0.9; /* Slightly dim on hover */
+}
+
+/* Style when the grid item is highlighted */
+.grid-item.highlighted {
+    background-color: #b22e5b; /* Tomato color */
+    color: white;
+}
+
+/* Style for the grid container */
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(13, 50px);  /* 13 columns, each 50px wide */
+    grid-template-rows: repeat(13, 50px);     /* 13 rows, each 50px tall */
+    justify-content: center;
+    margin: 20px auto;
+    background-color: #282a36;
+    padding: 10px;
+    user-select: none;
+
+}
+
+/* Style for each individual grid item (div) */
+.grid-item {
+    background-color: #2a2a2a;
+    border: 1px solid #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #979eab;
+    cursor: default;
+}
+
+/* Hover effect for grid items */
+.grid-item:hover {
+    opacity: .4;
+    transform: scale(1.05);      /* Slightly enlarge the grid item */
+}
+
+.suited {
+    background-color: #282a36;
+}
+
+.pairs {
+    background-color: #374151;
+}
+
+.offsuit {
+    background-color: #1f202a;
+}
+
+#answer {
+    display: flex; /* Flexbox layout for alignment */
+    justify-content: center; /* Center the button */
+    width: 100%; /* Ensure the container takes the full width */
+}
+
+#final {
+    padding: 12px 20px; /* Padding for top/bottom and left/right */
+    font-size: 16px; /* Font size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    color: white;
+    background-color: #d3236b;
+    width: 100%;
+}
+
+#final:hover {
+    opacity: 0.9; /* Slightly dim on hover */
+}
