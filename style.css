@@ -15,6 +15,15 @@ body {
 
 }
 
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+
+}
+
 #action {
     display: flex;
     justify-content: center;
@@ -84,6 +93,17 @@ body {
     border-radius: 5px;
 }
 
+.solution-compare {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    padding: 10px;
+    background-color: #414558;
+    border-radius: 5px;
+}
+
 .fold-buttons {
     background-color: #414558;
     padding: 12px 20px; /* Padding for top/bottom and left/right */
@@ -118,14 +138,26 @@ body {
     opacity: 0.9; /* Slightly dim on hover */
 }
 
-/* Style when the grid item is highlighted */
-.grid-item.highlighted {
-    background-color: #b22e5b; /* Tomato color */
-    color: white;
+
+.position-button.highlighted{
+    border: 2px solid #d3236b;
 }
 
 /* Style for the grid container */
-#grid-container {
+.grid-container-class {
+    display: grid;
+    grid-template-columns: repeat(13, 50px);  /* 13 columns, each 50px wide */
+    grid-template-rows: repeat(13, 50px);     /* 13 rows, each 50px tall */
+    justify-content: center;
+    margin: 20px auto;
+    background-color: #282a36;
+    padding: 10px;
+    user-select: none;
+
+}
+
+/* Style for the grid container */
+#grid-container-solution {
     display: grid;
     grid-template-columns: repeat(13, 50px);  /* 13 columns, each 50px wide */
     grid-template-rows: repeat(13, 50px);     /* 13 rows, each 50px tall */
@@ -147,6 +179,8 @@ body {
     font-size: 16px;
     color: #979eab;
     cursor: default;
+    position: relative;
+
 }
 
 /* Hover effect for grid items */
@@ -188,4 +222,45 @@ body {
 
 #final:hover {
     opacity: 0.9; /* Slightly dim on hover */
+}
+
+
+.score-container {
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-bottom: 20px;
+}
+
+.score-list {
+    list-style: none; /* Remove default list styling */
+    padding: 0;
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #444; /* Divider between items */
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.perfect {
+    color: #4CAF50; /* Green for Perfect */
+}
+
+.inaccuracy {
+    color: #FFEB3B; /* Yellow for Inaccuracy */
+}
+
+.mistake {
+    color: #F44336; /* Red for Mistake */
 }
