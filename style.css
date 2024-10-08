@@ -253,6 +253,10 @@ h3 {
     margin-right: 10px;
 }
 
+.label {
+    margin-right: 10px;
+}
+
 .perfect {
     color: #4CAF50; /* Green for Perfect */
 }

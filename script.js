@@ -8,11 +8,40 @@ const solutions = {
     'AA': 100
     },
     'UTG2': {
-    'AA' : 100,
-    'KK' : 100,
-    'A9o' : 75,
-    '55' : 50,
-    '22' : 25
+'AA': 100,
+'KK': 100,
+'AKs': 100,
+'AQs': 100,
+'AJs': 100,
+'ATs': 100,
+'A9s': 100,
+'A8s': 100,
+'A7s': 100,
+'A6s': 100,
+'A5s': 100,
+'A4s': 100,
+'A3s': 100,
+'A2s': 100,
+'AKo': 100,
+'AQo': 100,
+'KQo': 75,
+'KQs': 100,
+'JJ': 100,
+'TT': 100,
+'QQ': 100,
+'KJs': 100,
+'KTs': 100,
+'K9s': 50,
+'QJs': 100,
+'QTs': 100,
+'JTs': 100,
+'T9s': 50,
+'99': 100,
+'88': 100,
+'77': 50,
+'66': 25,
+'65s': 50,
+'55': 25
     }
 };
 
@@ -229,11 +258,13 @@ function createSolutionCompareWindow() {
     iconValueMistake.classList.add("value");
 
     iconPerfect.textContent = '✔';
+    iconPerfect.style.fontSize = '25px';
     iconInaccuracy.textContent = '⚠';
+    iconInaccuracy.style.fontSize = '25px';
     iconMistake.textContent = '❌'
 
     iconLabelPerfect.textContent = 'Perfect';
-    iconLabelInaccuracy.textContent = 'Inaccuracy';
+    iconLabelInaccuracy.textContent = 'Inaccuracy ';
     iconLabelMistake.textContent = 'Mistake'
     
     const byScore = document.createElement('h3');
@@ -244,8 +275,16 @@ function createSolutionCompareWindow() {
     //Compares the two grids, highlights on original grid what was missed in red and what 
     const customInput = document.getElementById('grid-container');
     const solutionCompare = document.getElementById('solution-grid');
-    compareSolution(customInput, position);
+    let comparedHands = compareSolution(customInput, position);
+    
+    let correctCount = Object.keys(comparedHands.exactMatches).length;
+    let inaccuracyCount = Object.keys(comparedHands.nonZeroNonMatching).length;
+    let wrongCount = Object.keys(comparedHands.zeroNonMatching).length;
 
+    iconValuePerfect.textContent = `${correctCount}`;
+    iconValueInaccuracy.textContent = `${inaccuracyCount}`;
+    iconValueMistake.textContent = `${wrongCount}`;
+    
     // Add Reset button 
 
     scorePerfect.appendChild(iconPerfect);
@@ -300,15 +339,33 @@ function compareSolution(userInput, position) {
 
     const solutionOutput = solutions[position];
     const commonValues = findCommonValues(userInputDict,solutionOutput);
-    console.log(Object.keys(commonValues).length);
-    console.log(Object.keys(solutionOutput));
-    return commonValues;
+    const exactMatches = {};
+    const nonZeroNonMatching = {};
+    const zeroNonMatching = {};
+
+    for (const hand in userInputDict) {
+        if (userInputDict[hand] === solutionOutput[hand]) {
+            exactMatches[hand] = userInputDict[hand];
+        } else if (userInputDict[hand] !== solutionOutput[hand] && userInputDict[hand] !== 0 && solutionOutput[hand] !== 0) {
+        nonZeroNonMatching[hand] = [userInputDict[hand], solutionOutput[hand]];
+        } else if (userInputDict[hand] === 0 || solutionOutput[hand] === 0) {
+        zeroNonMatching[hand] = [userInputDict[hand], solutionOutput[hand]];
+        }
+    }
+
+    console.log("Exact matches:", exactMatches);
+    console.log("Non-zero, non-matching:", nonZeroNonMatching);
+    console.log("One value is zero:", zeroNonMatching);
+    return {exactMatches, nonZeroNonMatching, zeroNonMatching};
 }
 
 // score
 
 function calcScore(commonVal) {
-    
+    // calculate open % right as % 
+    //bad 0-50, okay 50-80
+    // good 80-90
+    // excellent 90+
 }
 
 
