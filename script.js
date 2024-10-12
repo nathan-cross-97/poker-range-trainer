@@ -562,9 +562,12 @@ function createSolutionCompareWindow() {
     const iconLabelMistake = document.createElement('span');
     const iconValueMistake = document.createElement('span');
 
+    const iconFinal = document.createElement('span');
+
     iconPerfect.classList.add("icon");
     iconInaccuracy.classList.add("icon");
     iconMistake.classList.add("icon");
+    iconFinal.classList.add("icon");
 
     iconLabelPerfect.classList.add("label");
     iconLabelInaccuracy.classList.add("label");
@@ -579,6 +582,7 @@ function createSolutionCompareWindow() {
     iconInaccuracy.textContent = '⚠';
     iconInaccuracy.style.fontSize = '25px';
     iconMistake.textContent = '❌'
+    iconFinal.style.fontSize = '32px';
 
     iconLabelPerfect.textContent = 'Perfect';
     iconLabelInaccuracy.textContent = 'Inaccuracy ';
@@ -601,7 +605,10 @@ function createSolutionCompareWindow() {
     iconValuePerfect.textContent = `${correctCount}`;
     iconValueInaccuracy.textContent = `${inaccuracyCount}`;
     iconValueMistake.textContent = `${wrongCount}`;
-    
+
+    let calculatedScores = calcScore(inaccuracyCount,wrongCount);
+
+
     // Add Reset button 
 
     scorePerfect.appendChild(iconPerfect);
@@ -625,6 +632,42 @@ function createSolutionCompareWindow() {
 
 
     solutionCompareWindow.appendChild(textBubble);
+
+    const finalScore = document.createElement('h3');
+    finalScore.textContent = calculatedScores[0].toString()+'%';
+    const finalCat = document.createElement('h2');
+    finalCat.textContent = calculatedScores[1];
+
+    if (finalCat.textContent == 'Bad') {
+        iconFinal.textContent = '❌'
+        finalCat.classList.add('mistake');
+        finalScore.classList.add('mistake');
+    }
+
+    if (finalCat.textContent == 'Okay') {
+        iconFinal.textContent = '⚠'
+        iconFinal.classList.add('mistake');
+        finalCat.classList.add('inaccuracy');
+        finalScore.classList.add('inaccuracy');
+    }
+
+    if (finalCat.textContent == 'Good') {
+        iconFinal.textContent = '⚠';
+        iconFinal.classList.add('perfect');
+        finalCat.classList.add('perfect');
+        finalScore.classList.add('perfect');
+    }
+
+    if (finalCat.textContent == 'Excellent') {
+        iconFinal.textContent = '✔'
+        iconFinal.classList.add('perfect');
+        finalCat.classList.add('perfect');
+        finalScore.classList.add('perfect');
+    }
+
+    solutionCompareWindow.appendChild(finalCat);
+    solutionCompareWindow.appendChild(iconFinal);
+    solutionCompareWindow.appendChild(finalScore);
     solutionCompareWindow.appendChild(totalOpen);
     solutionCompareWindow.appendChild(scoreContainer);
     solutionCompareWindow.appendChild(resetButton);
@@ -678,11 +721,32 @@ function compareSolution(userInput, position) {
 
 // score
 
-function calcScore(commonVal) {
-    // calculate open % right as % 
+function calcScore(inaccuracyCount, wrongCount) {
+        // calculate input open % vs solution open % 
+    //each 100 - mistake * 2 + inaccuracy * 1 
     //bad 0-50, okay 50-80
     // good 80-90
     // excellent 90+
+
+    let finalScore = 100;
+
+    let scoreCategory = 'Excellent';
+    finalScore = finalScore - inaccuracyCount - wrongCount*3;
+    if (finalScore < 0) {
+        finalScore = 0;
+    }
+    if (finalScore>-1 && finalScore< 50) {
+        scoreCategory = 'Bad';
+    }
+    if (finalScore>49 && finalScore<80) {
+        scoreCategory = 'Okay';
+    }
+
+    if (finalScore>79 && finalScore<90) {
+        scoreCategory = 'Good';
+    }
+    return [finalScore, scoreCategory];
+
 }
 
 
